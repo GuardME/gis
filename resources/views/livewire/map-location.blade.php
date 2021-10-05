@@ -17,24 +17,73 @@
                     Form
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="">Latitude</label>
-                                <input wire:model="long" type="text" class="form-control">
+                    <form action="" wire:submit.prevent="saveLocation">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Longitude</label>
+                                    <input wire:model="long" type="text" class="form-control">
+                                    @error('long')
+                                 <small class="text-danger">
+                                     {{ $message }}
+                                 </small>
+                             @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Latitude</label>
+                                    <input wire:model="lat" type="text" name="" id="" class="form-control">
+                                    @error('lat')
+                                 <small class="text-danger">
+                                     {{ $message }}
+                                 </small>
+                             @enderror
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="">Longitude</label>
-                                <input wire:model="lat" type="text" name="" id="" class="form-control">
-                            </div>
+                        <div class="form-group">
+                             <label for="">Title</label>
+                             <input wire:model="title" type="text" class="form-control">
+                             @error('title')
+                                 <small class="text-danger">
+                                     {{ $message }}
+                                 </small>
+                             @enderror
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <textarea wire:model="description" type="text" class="form-control"></textarea>
+                            @error('description')
+                                 <small class="text-danger">
+                                     {{ $message }}
+                                 </small>
+                             @enderror
+                       </div>
+                       <div class="form-group">
+                        <label for="">Picture</label>
+                           <div class="custom-file">
+                            <input wire:model="image" type="file" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label dark-input" for="customFile">Choose file</label>
+                           </div>
+                           @error('image')
+                           <small class="text-danger">
+                               {{ $message }}
+                           </small>
+                       @enderror
+                        @if($image)
+                            <img src="{{ $image->temporaryUrl()}}" class="img-fluid">
+                        @endif
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-dark text-white btn-block" >Submit Location</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 </div>
@@ -53,142 +102,11 @@
         style: 'mapbox://styles/mapbox/streets-v11'
         });
 
-        const GeoJSON =
-        {
-        "type": "FeatureCollection",
-        "features": [
-            {
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                "106.73830754205",
-                "-6.2922403995615"
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "message": "Mantap",
-                "iconSize": [
-                50,
-                50
-                ],
-                "locationId": 30,
-                "title": "Hello new",
-                "image": "1a1eb1e4106fff0cc3467873f0f39cab.jpeg",
-                "description": "Mantap"
-            }
-            },
-            {
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                "106.68681595869",
-                "-6.3292244652013"
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "message": "oke mantap Edit",
-                "iconSize": [
-                50,
-                50
-                ],
-                "locationId": 29,
-                "title": "Rumah saya Edit",
-                "image": "0ea59991df2cb96b4df6e32307ea20ff.png",
-                "description": "oke mantap Edit"
-            }
-            },
-            {
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                "106.62490035406",
-                "-6.3266855038639"
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "message": "Update Baru",
-                "iconSize": [
-                50,
-                50
-                ],
-                "locationId": 22,
-                "title": "Update Baru Gambar",
-                "image": "d09444b68d8b72daa324f97c999c2301.jpeg",
-                "description": "Update Baru"
-            }
-            },
-            {
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                "106.72391468711",
-                "-6.3934163494543"
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                "iconSize": [
-                50,
-                50
-                ],
-                "locationId": 19,
-                "title": "awdwad",
-                "image": "f0b88ffd980a764b9fca60d853b300ff.png",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            }
-            },
-            {
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                "106.67224158205",
-                "-6.3884963990263"
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                "iconSize": [
-                50,
-                50
-                ],
-                "locationId": 18,
-                "title": "adwawd",
-                "image": "4c35cb1b76af09e6205f94024e093fe6.jpeg",
-                "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            }
-            },
-            {
-            "type": "Feature",
-            "geometry": {
-                "coordinates": [
-                "106.74495523289",
-                "-6.3642034511073"
-                ],
-                "type": "Point"
-            },
-            "properties": {
-                "message": "awdwad",
-                "iconSize": [
-                50,
-                50
-                ],
-                "locationId": 12,
-                "title": "adawd",
-                "image": "7c8c949fd0499eb50cb33787d680778c.jpeg",
-                "description": "awdwad"
-            }
-            }
-        ]
-        }
 
-// 'url(https://docs.mapbox.com/help/demos/custom-markers-gl-js/mapbox-icon.png)'
-        const loadLocations = () => {
-            GeoJSON.features.forEach((location) => {
+
+
+        const loadLocations = (geoJson) => {
+            geoJson.features.forEach((location) => {
                 const {geometry, properties} = location
                 const {iconSize, locationId, title, image, description} = properties
 
@@ -200,9 +118,32 @@
                 markerElement.style.width = '50px'
                 markerElement.style.height = '50px'
 
+                const imageStorage = '{{ asset("/storage/images") }}' + '/' + image
+
+                const content = `
+                <div class="overflow-y, auto;max-height:400px,width:100%">
+                <table class="table table-sm mt-2">
+                    <tbody>
+                        <tr>
+                            <td>Title</td>
+                            <td>${title}</td>
+                        </tr>
+                        <tr>
+                            <td>Picture</td>
+                            <td><img src="${imageStorage}" loading="lazy" class="img-fluid" alt=""></td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>${description}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                `
+
                 const popUp = new mapboxgl.Popup({
                     offset:25
-                }).setHTML(description).setMaxWidth("400px")
+                }).setHTML(content).setMaxWidth("400px")
 
                 new mapboxgl.Marker(markerElement)
                 .setLngLat(geometry.coordinates)
@@ -211,7 +152,11 @@
             })
         }
 
-        loadLocations()
+        loadLocations({!! $geoJson !!})
+
+        window.addEventListener('locationAdded', (e) => {
+            loadLocations(JSON.parse(e.detail));
+        })
 
         const style = "dark-v10"
         map.setStyle(`mapbox://styles/mapbox/${style}`)
